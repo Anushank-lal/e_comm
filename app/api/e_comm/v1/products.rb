@@ -30,7 +30,7 @@ module EComm
         requires :status, type: String, allow_blank: false, desc: "Product status"
       end
 
-      post :product, rabl: "/api/v1/products/create.json.rabl" do
+      put :product, rabl: "/api/v1/products/create.json.rabl" do
         begin
           product = Product.find_by(name: params[:name])
           error!({error: ("Product name already exists")}, 400) if product.present?
@@ -43,8 +43,31 @@ module EComm
           }
 
           if @product.save!
-            error!({success: ('Product Created.')}, 200)
+            #error!({success: ('Product Created.')}, 200)
           else
+            error!({error: @product.errors.full_messages}, 400)
+          end
+        rescue Exception => e
+          error!({ error: ('Internal Server Error')}, 500)
+        end
+      end
+
+      desc "Edit a Product"
+      params do
+        optional :description, type: String, allow_blank: false, desc: "Product Description"
+        optional :name, type: String, allow_blank: false, desc: "Product Name"
+        optional :price, type: String, allow_blank: false, desc: "Product Price"
+        optional :status, type: String, allow_blank: false, desc: "Product status"
+        requires :id, type: String, allow_blank: false, desc: "Product Id"
+      end
+      patch :product, rabl: "/api/v1/products/create.json.rabl" do
+        begin
+          @product = Product.find_by(id: params[:id])
+          error!({error: ("Product name not exists")}, 400) if @product.nil?
+
+          @product.update_attributes!(name: params[:name], description: params[:description],
+            price: params[:price], status: params[:status])
+          if !@product.errors.blank?
             error!({error: @product.errors.full_messages}, 400)
           end
         rescue Exception => e
