@@ -13,5 +13,6 @@ class API < Grape::API
   prefix :api
 
   mount EComm::V1::Users
+  mount EComm::V1::Products
 
 end

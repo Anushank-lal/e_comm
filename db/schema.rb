@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20151222171833) do
     t.string   "description", limit: 255
     t.string   "name",        limit: 255
     t.float    "price",       limit: 24
-    t.boolean  "status"
+    t.integer  "status",      limit: 4
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end
