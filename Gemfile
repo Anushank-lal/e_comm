@@ -43,3 +43,9 @@ group :development, :test do
   gem 'spring'
 end
 
+# For APIs
+gem 'grape'#, :git => 'https://github.com/intridea/grape.git'
+# Json  templating engine
+gem 'rabl'#, "0.11.4" #, :git => 'https://github.com/intridea/grape.git'
+# Grape-rabl middleware
+gem 'grape-rabl'
