@@ -14,5 +14,7 @@ class API < Grape::API
 
   mount EComm::V1::Users
   mount EComm::V1::Products
+  mount EComm::V1::Orders
+
 
 end
