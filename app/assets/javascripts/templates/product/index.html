@@ -1,8 +1,25 @@
-<div infinite-scroll='productList.nextPage()' infinite-scroll-listen-for-event="orderBy:sortType:reverse" infinite-scroll-disabled='productList.busy' infinite-scroll-distance='1'>
+<div infinite-scroll='productList.nextPage()' infinite-scroll-disabled='productList.busy' infinite-scroll-distance='1'>
 
-  <div class="row recentlyViewlist" ng-repeat="product in productList.products | orderBy:sortType:reverse">
-    {{product}}
-  </div><!--row-->
+  <table class="table" ng-show="productList.products.length">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="product in productList.products">
+        <td ng-bind="product.id"></td>
+        <td ng-bind="product.name"></td>
+        <td ng-bind="product.description"></td>
+        <td ng-bind="product.status"></td>
+        <td ng-bind="product.price"></td>
+      </tr>
+    </tbody>
+  </table>
 
   <div ng-show='!productList.products.length && !productList.more' class="text-center paddingtopbtm5">
     <div class="row text-center mrgnTop10 mrgnBtm10">
