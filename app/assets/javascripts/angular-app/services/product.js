@@ -53,7 +53,7 @@ ecom.factory("productService", ['$http', '$q', '$route',
       {
         name:        product.name,
         description: product.description,
-        status:      product.status,
+        status:      (product.status) ? 'enabled' : 'disabled',
         price:       product.price
       })
       .then(function(response) {
@@ -74,6 +74,7 @@ ecom.factory("productService", ['$http', '$q', '$route',
 
       $http.get(apiPath + "/products/" + id)
         .then(function(response) {
+          console.log(response.data)
           deferred.resolve(response.data);
         },function(error) {
           deferred.reject(error);
@@ -89,7 +90,7 @@ ecom.factory("productService", ['$http', '$q', '$route',
       $http.patch(apiPath + "/products/" + product.id, {
         name:        product.name,
         description: product.description,
-        status:      product.status,
+        status:      (product.status) ? 'enabled' : 'disabled',
         price:       product.price
       })
       .then(function(response) {

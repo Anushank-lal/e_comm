@@ -21,6 +21,9 @@ ecom.controller("ProductController", ['$scope', '$location', 'productService', '
 
     if (productDetail) {
       $scope.product = productDetail.product;
+      $scope.product.status = (productDetail.product.status == "enabled") ? true : false;
+      console.log(productDetail.product.status)
+      console.log($scope.product.status)
     };
 
     $scope.addProduct = function () {
