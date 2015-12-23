@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+ruby "2.1.5"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'
@@ -36,6 +37,8 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
+  gem 'quiet_assets'
+
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 
@@ -49,3 +52,7 @@ gem 'grape'#, :git => 'https://github.com/intridea/grape.git'
 gem 'rabl'#, "0.11.4" #, :git => 'https://github.com/intridea/grape.git'
 # Grape-rabl middleware
 gem 'grape-rabl'
+
+# Javascript library mngt
+gem "bower-rails", "~> 0.10.0"
+gem 'angular-rails-templates', '0.2.0'
