@@ -2,7 +2,7 @@
 
 /* App Module */
 var ecom = angular.module('ecom', ['ngRoute', 'ngResource', 'templates',
-                    'ui.bootstrap', 'ngAnimate' ]);
+                    'ui.bootstrap', 'ngAnimate', 'LocalStorageModule' ]);
 
 var apiPath = "/api/v1";
 
@@ -11,9 +11,10 @@ ecom.config(['$compileProvider', function ($compileProvider) {
   $compileProvider.debugInfoEnabled(false);
 }]);
 
-// Disable Week Number DatePicker
-ecom.config(['uibDatepickerConfig', function(uibDatepickerConfig) {
-  uibDatepickerConfig.showWeeks = false;
+ecom.config(['localStorageServiceProvider', function (localStorageServiceProvider) {
+  localStorageServiceProvider.setPrefix('ecomm');
+  //localStorageServiceProvider.setStorageType('sessionStorage')
+  localStorageServiceProvider.setNotify(true, true);
 }]);
 
 // Routes
@@ -24,10 +25,12 @@ ecom.config(['$routeProvider', '$locationProvider',
         templateUrl: 'home/index.html'
       })
       .when("/login",{
-        templateUrl: 'user/login.html'
+        templateUrl: 'user/login.html',
+        controller: 'UserController',
       })
       .when("/register",{
-        templateUrl: 'user/register.html'
+        templateUrl: 'user/register.html',
+        controller: 'UserController',
       })
       .otherwise({
         redirectTo: '/'
