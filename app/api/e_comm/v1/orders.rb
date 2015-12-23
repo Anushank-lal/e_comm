@@ -45,7 +45,7 @@ module EComm
         begin
           limit = params[:limit].nil? ? 10 : params[:limit]
           offset = params[:offset].nil? ? 0 : params[:offset]
-          @orders = Order.where(customer_id: params[:customer_id]).limit(limit).offset(offset)
+          @orders = Order.where(customer_id: params[:customer_id]).limit(limit).offset(offset).order(:date)
           error!({error: ('No Orders available.')}, 400) if @orders.nil?
         rescue Exception => e
           error!({ error: I18n.t('api.internal_server_error')}, 500)
