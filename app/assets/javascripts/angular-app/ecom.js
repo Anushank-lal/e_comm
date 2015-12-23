@@ -23,6 +23,12 @@ ecom.config(['$routeProvider', '$locationProvider',
       .when("/",{
         templateUrl: 'home/index.html'
       })
+      .when("/login",{
+        templateUrl: 'user/login.html'
+      })
+      .when("/register",{
+        templateUrl: 'user/register.html'
+      })
       .otherwise({
         redirectTo: '/'
       });
