@@ -7,5 +7,5 @@ node(:result_count) do
 end
 
 node(:last) do
-@orders.last.id
+@orders.last.id  if @orders.present?
 end

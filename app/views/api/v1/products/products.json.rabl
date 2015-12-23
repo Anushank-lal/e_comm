@@ -1,6 +1,3 @@
-#collection @products
-
-#attributes :id, :name, :price, :description, :status
 node(:products) do
   @products.map{|x| x.attributes}
 end
@@ -10,5 +7,5 @@ node(:result_count) do
 end
 
 node(:last) do
-@products.last.id
+@products.last.id if @products.present?
 end
