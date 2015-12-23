@@ -74,7 +74,7 @@ ecom.factory("productService", ['$http', '$q', '$route',
 
       $http.get(apiPath + "/products/" + id)
         .then(function(response) {
-          console.log(response.data)
+          console.log(response)
           deferred.resolve(response.data);
         },function(error) {
           deferred.reject(error);
