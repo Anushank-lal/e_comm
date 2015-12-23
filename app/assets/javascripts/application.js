@@ -17,6 +17,7 @@
 //= require angular-resource
 //= require angular-bootstrap
 //= require angular-animate
+//= require angular-local-storage
 //= require angular-rails-templates
 //= require angular-app/ecom
 //= require_tree ./angular-app

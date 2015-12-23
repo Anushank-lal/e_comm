@@ -17,11 +17,12 @@
 
   <div ng-controller="HomeController">
 
-    <div class="middle-container">
+    <div ng-include src="'shared/_header.html'"></div>
+
+    <div class="container" style="margin-top: 100px;">
       <div ng-view autoscroll="true"></div>
     </div>
 
-    <!-- <div ng-include src="'mobile/modal/_search_box_modal.html'"></div> -->
   </div>
 
 </body>
