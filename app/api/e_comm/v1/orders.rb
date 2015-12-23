@@ -13,7 +13,7 @@ module EComm
       end
 
       put :cart_items, rabl: "/api/v1/orders/cart_item.json.rabl" do
-        #begin
+        begin
           product = Product.find_by(id: params[:product_id])
           unit_price = product.price
           total_price = (unit_price * params[:qty])
@@ -29,9 +29,27 @@ module EComm
           }
 
           error!({error: @cart_item.errors.full_messages}, 400) if !(@cart_item.save!)
-        # rescue Exception => e
-        #   error!({ error: "Internal Server Error" }, 500)
-        # end
+        rescue Exception => e
+          error!({ error: "Internal Server Error" }, 500)
+        end
+      end
+
+      desc "List Orders for a User"
+      params do
+        requires :customer_id, type: Integer, allow_blank: false
+        optional :limit, type: Integer, allow_blank: true
+        optional :offset, type: Integer, allow_blank: true
+      end
+
+      get :orders, rabl: "/api/v1/orders/orders.json.rabl" do
+        begin
+          limit = params[:limit].nil? ? 10 : params[:limit]
+          offset = params[:offset].nil? ? 0 : params[:offset]
+          @orders = Order.where(customer_id: params[:customer_id]).limit(limit).offset(offset)
+          error!({error: ('No Orders available.')}, 400) if @orders.nil?
+        rescue Exception => e
+          error!({ error: I18n.t('api.internal_server_error')}, 500)
+        end
       end
 
     end
