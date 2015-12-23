@@ -45,7 +45,7 @@ module EComm
         requires :status, type: String, allow_blank: false, desc: "Product status"
       end
 
-      post :product, rabl: "/api/v1/products/create.json.rabl" do
+      post :products, rabl: "/api/v1/products/create.json.rabl" do
         begin
           product = Product.find_by(name: params[:name])
           error!({error: ("Product name already exists")}, 400) if product.present?
@@ -71,6 +71,7 @@ module EComm
         optional :status, type: String, allow_blank: false, desc: "Product status"
         requires :id, type: String, allow_blank: false, desc: "Product Id"
       end
+
       patch "products/:id", rabl: "/api/v1/products/create.json.rabl" do
         begin
           @product = Product.find_by(id: params[:id])

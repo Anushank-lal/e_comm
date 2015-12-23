@@ -22,7 +22,7 @@ ecom.controller("ProductController", ['$scope', 'productService',
     $scope.addProduct = function () {
       if ($scope.newProduct.$valid) {
         $scope.isSaving = true;
-        var promise = productService.login($scope.product);
+        var promise = productService.addProduct($scope.product);
         promise.then(
           function(response){ // success
             $location.path("/");
@@ -41,7 +41,7 @@ ecom.controller("ProductController", ['$scope', 'productService',
     $scope.updateProduct = function () {
       if ($scope.editProduct.$valid) {
         $scope.isSaving = true;
-        var promise = productService.login($scope.product);
+        var promise = productService.updateProduct($scope.product);
         promise.then(
           function(response){ // success
             $location.path("/");

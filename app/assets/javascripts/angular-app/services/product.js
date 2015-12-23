@@ -51,7 +51,7 @@ ecom.factory("productService", ['$http', '$q',
 
       $http.post(apiPath + "/products",
       {
-        name:        product.email,
+        name:        product.name,
         description: product.description,
         status:      product.status,
         price:       product.price
@@ -60,6 +60,7 @@ ecom.factory("productService", ['$http', '$q',
         deferred.resolve();
       },
       function(error) {
+        console.log(error)
         deferred.reject(error.data.error);
       });
 
@@ -88,7 +89,7 @@ ecom.factory("productService", ['$http', '$q',
       var deferred = $q.defer();
 
       $http.put(apiPath + "/products/" + product.id, {
-        name:        product.email,
+        name:        product.name,
         description: product.description,
         status:      product.status,
         price:       product.price
