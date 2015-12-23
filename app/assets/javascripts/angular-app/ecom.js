@@ -23,6 +23,14 @@ ecom.config(['$routeProvider', '$locationProvider',
     $routeProvider
       .when("/",{
         templateUrl: 'product/index.html',
+        controller: 'ProductsController',
+      })
+      .when("/products/new",{
+        templateUrl: 'product/new.html',
+        controller: 'ProductController',
+      })
+      .when("/products/edit/:id",{
+        templateUrl: 'product/edit.html',
         controller: 'ProductController',
       })
       .when("/login",{

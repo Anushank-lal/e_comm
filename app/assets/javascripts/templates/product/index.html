@@ -1,5 +1,8 @@
+<div>
+  <a href="products/new">Add Product</a>
+  <br/>
+</div>
 <div infinite-scroll='productList.nextPage()' infinite-scroll-disabled='productList.busy' infinite-scroll-distance='1'>
-
   <table class="table" ng-show="productList.products.length">
     <thead>
       <tr>
@@ -17,6 +20,10 @@
         <td ng-bind="product.description"></td>
         <td ng-bind="product.status"></td>
         <td ng-bind="product.price"></td>
+        <td>
+          <a ng-href="products/edit/{{product.id}}" ng-if="!UserInfo.isLogin">Edit</a>
+          <a ng-href="products/edit/{{product.id}}" ng-if="UserInfo.isLogin">Add to cart</a>
+        </td>
       </tr>
     </tbody>
   </table>
@@ -31,5 +38,4 @@
   <div ng-show='productList.more && productList.busy' class="text-center paddingtopbtm5">
     <i class="fa fa-refresh fa-spin fa-2x"></i>
   </div>
-
 </div>

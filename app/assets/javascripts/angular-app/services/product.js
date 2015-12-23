@@ -2,7 +2,7 @@
 
 /* Factory */
 
-ecom.factory('ProductList', ['$http',
+ecom.factory('productList', ['$http',
   function($http){
     var ProductList = function() {
       this.products = [];
@@ -39,5 +39,76 @@ ecom.factory('ProductList', ['$http',
     };
 
     return ProductList;
+  }
+]);
+
+
+ecom.factory("productService", ['$http', '$q',
+  function($http, $q) {
+
+    function addProduct(product) {
+      var deferred = $q.defer();
+
+      $http.post(apiPath + "/products",
+      {
+        name:        product.email,
+        description: product.description,
+        status:      product.status,
+        price:       product.price
+      })
+      .then(function(response) {
+        deferred.resolve();
+      },
+      function(error) {
+        deferred.reject(error.data.error);
+      });
+
+      return deferred.promise;
+    }
+
+
+    function showProduct(id) {
+      var deferred = $q.defer();
+
+      $http.get(apiPath + "/products/" + id)
+        .then(function(response) {
+
+          deferred.resolve();
+
+        },function(error) {
+
+          deferred.reject(error);
+        });
+
+      return deferred.promise;
+    }
+
+
+    function updateProduct(product) {
+      var deferred = $q.defer();
+
+      $http.put(apiPath + "/products/" + product.id, {
+        name:        product.email,
+        description: product.description,
+        status:      product.status,
+        price:       product.price
+      })
+      .then(function(response) {
+        deferred.resolve();
+      },
+      function(error) {
+        deferred.reject(error.data.error);
+      });
+
+      return deferred.promise;
+    }
+
+
+    return {
+      addProduct:     addProduct,
+      showProduct:    showProduct,
+      updateProduct:  updateProduct
+    };
+
   }
 ]);
