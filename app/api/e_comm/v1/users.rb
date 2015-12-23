@@ -12,7 +12,7 @@ module EComm
         requires :password, type: String, allow_blank: false, desc: "User Password"
       end
 
-      get :users, rabl: "/api/v1/users/create.json.rabl" do
+      post :users, rabl: "/api/v1/users/create.json.rabl" do
         begin
           @user = Customer.find_by(email: params[:email])
           error!({error: ('No user with this email.')}, 400) if @user.nil?
