@@ -51,11 +51,10 @@ module EComm
           error!({error: ("Product name already exists")}, 400) if product.present?
 
           @product = Product.new
-          status = params[:status] == true ? 'enabled' : 'disabled'
           @product.attributes =
           {
             name: params[:name], description: params[:description],
-            price: params[:price], status: status
+            price: params[:price], status: params[:status]
           }
 
           error!({error: @product.errors.full_messages}, 400) if !(@product.save!)
@@ -77,9 +76,8 @@ module EComm
         begin
           @product = Product.find_by(id: params[:id])
           error!({error: ("Product name not exists")}, 400) if @product.nil?
-          status = params[:status] == true ? 'enabled' : 'disabled'
           @product.update_attributes!(name: params[:name], description: params[:description],
-            price: params[:price], status: status)
+            price: params[:price], status: params[:status])
           if !@product.errors.blank?
             error!({error: @product.errors.full_messages}, 400)
           end
