@@ -3,5 +3,5 @@ node(:order) do
 end
 
 node(:payment_url) do
-"http://localhost:3001/payments"
+"http://localhost:3001/process_payment"
 end
