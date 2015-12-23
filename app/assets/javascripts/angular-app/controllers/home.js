@@ -1,8 +1,10 @@
 'use strict';
 
 /* Controllers */
-ecom.controller("HomeController", ['$scope', '$location',
-  function($scope, $location) {
+ecom.controller("HomeController", ['$scope', '$location', 'UserInfo',
+  function($scope, $location, UserInfo) {
+
+    $scope.UserInfo = UserInfo;
 
     $scope.homeModelObj = {
       query: '',

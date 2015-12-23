@@ -12,8 +12,9 @@
     <div id="navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
         <li class=""><a href="./">Home</a></li>
-        <li><a href="login">Sign in</a></li>
-        <li><a href="register">Register</a></li>
+        <li ng-if="!UserInfo.isLogin"><a href="login">Sign in</a></li>
+        <li ng-if="!UserInfo.isLogin"><a href="register">Register</a></li>
+        <li ng-if="UserInfo.isLogin"><a href="#" ng-click="logout()">Logout</a></li>
       </ul>
     </div><!--/.nav-collapse -->
   </div>

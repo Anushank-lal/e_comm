@@ -14,10 +14,11 @@ ecom.factory("userService", ['$http', '$q', '$location', 'UserInfo', 'LocalStora
       })
       .then(function(response) {
         UserInfo.isLogin = true;
+        UserInfo.token   = response.data.customer.access_token;
         UserInfo.info    = {
-          email:      response.data.user.email,
-          first_name: response.data.user.first_name,
-          last_name:  response.data.user.last_name
+          email:      response.data.customer.email,
+          first_name: response.data.customer.first_name,
+          last_name:  response.data.customer.last_name
         };
 
         LocalStorage.setKey('UserInfo', UserInfo);
@@ -60,7 +61,7 @@ ecom.factory("userService", ['$http', '$q', '$location', 'UserInfo', 'LocalStora
     function registration(user) {
       var deferred = $q.defer();
 
-      $http.post(apiPath + "/signup?locale=" + SiteSettings.locale, {
+      $http.post(apiPath + "/signup", {
         first_name:       user.first_name,
         last_name:        user.last_name,
         email:            user.email,
@@ -69,12 +70,11 @@ ecom.factory("userService", ['$http', '$q', '$location', 'UserInfo', 'LocalStora
       })
       .then(function(response) {
         UserInfo.isLogin = true;
-        UserInfo.token   = response.data.user.access_token;
+        UserInfo.token   = response.data.customer.access_token;
         UserInfo.info    = {
-          email:      response.data.user.email,
-          first_name: response.data.user.first_name,
-          last_name:  response.data.user.last_name,
-          phone:      response.data.user.phone
+          email:      response.data.customer.email,
+          first_name: response.data.customer.first_name,
+          last_name:  response.data.customer.last_name
         };
 
         LocalStorage.setKey('UserInfo', UserInfo);

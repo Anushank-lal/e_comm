@@ -2,7 +2,7 @@
 
 /* Controllers */
 ecom.controller("UserController", ['$scope', 'userService', '$location',
-  function($scope, authenticationService, $location){
+  function($scope, userService, $location){
 
     $scope.user = {
       first_name: '',
@@ -15,7 +15,7 @@ ecom.controller("UserController", ['$scope', 'userService', '$location',
     $scope.login = function () {
       if ($scope.loginForm.$valid) {
         $scope.isSaving = true;
-        var promise = authenticationService.login($scope.user.email, $scope.user.password);
+        var promise = userService.login($scope.user.email, $scope.user.password);
         promise.then(
           function(response){ // success
             $location.path("/");
@@ -33,13 +33,13 @@ ecom.controller("UserController", ['$scope', 'userService', '$location',
     $scope.register = function () {
       if ($scope.registrationForm.$valid) {
         $scope.isSaving = true;
-        var promise = authenticationService.registration($scope.user);
+        var promise = userService.registration($scope.user);
         promise.then(
           function(response){ // success
             $location.path("/");
           },
           function(error){ // error
-            $scope.registrationForm.email.$error.taken = error;
+            $scope.registerErrorMessage = error;
           }
         ).finally(function() {
           // Always execute this on both error and success
