@@ -43,8 +43,8 @@ ecom.factory('productList', ['$http',
 ]);
 
 
-ecom.factory("productService", ['$http', '$q',
-  function($http, $q) {
+ecom.factory("productService", ['$http', '$q', '$route',
+  function($http, $q, $route) {
 
     function addProduct(product) {
       var deferred = $q.defer();
@@ -60,7 +60,6 @@ ecom.factory("productService", ['$http', '$q',
         deferred.resolve();
       },
       function(error) {
-        console.log(error)
         deferred.reject(error.data.error);
       });
 
@@ -71,13 +70,12 @@ ecom.factory("productService", ['$http', '$q',
     function showProduct(id) {
       var deferred = $q.defer();
 
+      id = $route.current.params.id;
+
       $http.get(apiPath + "/products/" + id)
         .then(function(response) {
-
-          deferred.resolve();
-
+          deferred.resolve(response.data);
         },function(error) {
-
           deferred.reject(error);
         });
 
@@ -88,7 +86,7 @@ ecom.factory("productService", ['$http', '$q',
     function updateProduct(product) {
       var deferred = $q.defer();
 
-      $http.put(apiPath + "/products/" + product.id, {
+      $http.patch(apiPath + "/products/" + product.id, {
         name:        product.name,
         description: product.description,
         status:      product.status,

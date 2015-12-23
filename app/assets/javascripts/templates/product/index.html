@@ -18,7 +18,10 @@
         <td ng-bind="product.id"></td>
         <td ng-bind="product.name"></td>
         <td ng-bind="product.description"></td>
-        <td ng-bind="product.status"></td>
+        <td>
+          <span ng-if="product.status == 0">Deactive</span>
+          <span ng-if="product.status == 1">Active</span>
+        </td>
         <td ng-bind="product.price"></td>
         <td>
           <a ng-href="products/edit/{{product.id}}" ng-if="!UserInfo.isLogin">Edit</a>

@@ -23,23 +23,29 @@ ecom.config(['$routeProvider', '$locationProvider',
     $routeProvider
       .when("/",{
         templateUrl: 'product/index.html',
-        controller: 'ProductsController',
+        controller: 'ProductsController'
       })
       .when("/products/new",{
         templateUrl: 'product/new.html',
         controller: 'ProductController',
+        resolve: {
+          productDetail: ['productService', function(productService){ return '' }]
+        }
       })
       .when("/products/edit/:id",{
         templateUrl: 'product/edit.html',
         controller: 'ProductController',
+        resolve: {
+          productDetail: ['productService', function(productService){ return productService.showProduct(); }]
+        }
       })
       .when("/login",{
         templateUrl: 'user/login.html',
-        controller: 'UserController',
+        controller: 'UserController'
       })
       .when("/register",{
         templateUrl: 'user/register.html',
-        controller: 'UserController',
+        controller: 'UserController'
       })
       .otherwise({
         redirectTo: '/'

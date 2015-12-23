@@ -8,8 +8,8 @@ ecom.controller("ProductsController", ['$scope', 'productList',
 ]);
 
 /* Controllers */
-ecom.controller("ProductController", ['$scope', 'productService',
-  function($scope, productService) {
+ecom.controller("ProductController", ['$scope', '$location', 'productService', 'productDetail',
+  function($scope, $location, productService, productDetail) {
 
     $scope.product = {
       id: '',
@@ -17,6 +17,10 @@ ecom.controller("ProductController", ['$scope', 'productService',
       description: '',
       status: false,
       price: ''
+    };
+
+    if (productDetail) {
+      $scope.product = productDetail.product;
     };
 
     $scope.addProduct = function () {
