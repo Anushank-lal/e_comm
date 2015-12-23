@@ -2,7 +2,7 @@
 
 /* App Module */
 var ecom = angular.module('ecom', ['ngRoute', 'ngResource', 'templates',
-                    'ui.bootstrap', 'ngAnimate', 'LocalStorageModule' ]);
+                    'ui.bootstrap', 'ngAnimate', 'LocalStorageModule', 'infinite-scroll' ]);
 
 var apiPath = "/api/v1";
 

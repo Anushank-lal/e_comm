@@ -16,17 +16,17 @@ ecom.factory('ProductList', ['$http',
       if (this.busy) return;
       this.busy = true;
 
-      var url = apiPath + "/products?limit=" + this.limit + "&page=" + this.offset;
+      var url = apiPath + "/products?limit=" + this.limit + "&offset=" + this.offset;
 
       $http.get(url).success(function(data) {
         var products = data.products;
-        console.log(" Current Page : " + data.current_page +" Last Page : " + data.last_page);
+        console.log("Next offset : " + data.last);
         // Pushing Results
         for (var i = 0; i < products.length; i++) {
           this.products.push(products[i]);
         }
-        if (data.current_page < data.last_page){
-          this.next_page = data.current_page + 1;
+        if (products.length){
+          this.offset = data.last;
           this.busy = false;
           this.more = true;
         }
