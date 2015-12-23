@@ -1,3 +1,11 @@
-collection @orders
+node(:orders) do
+  @orders.map{|x| x.attributes}
+end
 
-attributes :id,:order_no, :customer_id, :total, :date, :status, :payment
+node(:result_count) do
+@orders.count
+end
+
+node(:last) do
+@orders.last.id
+end
