@@ -17,10 +17,13 @@ module EComm
           product = Product.find_by(id: params[:product_id])
           unit_price = product.price
           total_price = (unit_price * params[:qty])
-          order_no = rand.to_s[2..8]
           @order = Order.find_by(customer_id: params[:customer_id])
-          @order = Order.create!(order_no: order_no, customer_id: params[:customer_id], total: total_price, date: Date.today) if @order.blank?
-
+          if @order.blank?
+            order_no = rand.to_s[2..8]
+            @order = Order.create!(status: 0, order_no: order_no, customer_id: params[:customer_id], total: total_price, date: Date.today)
+          else
+            @order.update_attributes(total: total_price)
+          end
           @cart_item = OrderLine.new
           @cart_item.attributes =
           {
@@ -46,7 +49,7 @@ module EComm
           limit = params[:limit].nil? ? 10 : params[:limit]
           offset = params[:offset].nil? ? 0 : params[:offset]
           @orders = Order.where(customer_id: params[:customer_id]).limit(limit).offset(offset).order(:date)
-          error!({error: ('No Orders available.')}, 400) if @orders.nil?
+          error!({error: ('No Orders available.')}, 400) if @orders.blank?
         rescue Exception => e
           error!({ error: I18n.t('api.internal_server_error')}, 500)
         end
