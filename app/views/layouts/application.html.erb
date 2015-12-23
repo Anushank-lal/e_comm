@@ -1,14 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="ecom">
 <head>
   <title>EComm</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'application', media: 'all'%>
+  <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <!-- Set Base for removing hash from url -->
+  <base href="/">
+
 </head>
 <body>
 
-<%= yield %>
+  <div ng-controller="HomeController">
+
+    <div class="middle-container">
+      <div ng-view autoscroll="true"></div>
+    </div>
+
+    <!-- <div ng-include src="'mobile/modal/_search_box_modal.html'"></div> -->
+  </div>
 
 </body>
 </html>
