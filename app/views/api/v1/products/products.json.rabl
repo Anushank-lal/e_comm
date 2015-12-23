@@ -1,5 +1,5 @@
 node(:products) do
-  @products.map{|x| x.attributes}
+  @products.map{|x| x.attributes.merge(status: x.status)}
 end
 
 node(:result_count) do
