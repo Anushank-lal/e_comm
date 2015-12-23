@@ -11,12 +11,12 @@ module EComm
       end
 
       get "products/:id", rabl: "/api/v1/products/product.json.rabl" do
-        begin
+        #begin
           @product = Product.find_by(id: params[:id])
           error!({error: ('No product available with this id.')}, 400) if @product.nil?
-        rescue Exception => e
-          error!({ error: I18n.t('api.internal_server_error')}, 500)
-        end
+        # rescue Exception => e
+        #   error!({ error: I18n.t('api.internal_server_error')}, 500)
+        # end
       end
 
 
@@ -27,14 +27,14 @@ module EComm
       end
 
       get :products, rabl: "/api/v1/products/products.json.rabl" do
-        begin
+        #begin
           limit = params[:limit].nil? ? 10 : params[:limit]
           offset = params[:offset].nil? ? 0 : params[:offset]
           @products = Product.limit(limit).offset(offset)
           error!({error: ('No products available.')}, 400) if @products.nil?
-        rescue Exception => e
-          error!({ error: I18n.t('api.internal_server_error')}, 500)
-        end
+        # rescue Exception => e
+        #   error!({ error: I18n.t('api.internal_server_error')}, 500)
+        # end
       end
 
       desc "Create new Product"
@@ -46,21 +46,22 @@ module EComm
       end
 
       post :products, rabl: "/api/v1/products/create.json.rabl" do
-        begin
+        #begin
           product = Product.find_by(name: params[:name])
           error!({error: ("Product name already exists")}, 400) if product.present?
 
           @product = Product.new
+          status = params[:status] == true ? 'enabled' : 'disabled'
           @product.attributes =
           {
             name: params[:name], description: params[:description],
-            price: params[:price], status: params[:status]
+            price: params[:price], status: status
           }
 
           error!({error: @product.errors.full_messages}, 400) if !(@product.save!)
-        rescue Exception => e
-          error!({ error: ('Internal Server Error')}, 500)
-        end
+        # rescue Exception => e
+        #   error!({ error: ('Internal Server Error')}, 500)
+        # end
       end
 
       desc "Edit a Product"
@@ -73,18 +74,18 @@ module EComm
       end
 
       patch "products/:id", rabl: "/api/v1/products/create.json.rabl" do
-        begin
+        #begin
           @product = Product.find_by(id: params[:id])
           error!({error: ("Product name not exists")}, 400) if @product.nil?
-
+          status = params[:status] == true ? 'enabled' : 'disabled'
           @product.update_attributes!(name: params[:name], description: params[:description],
-            price: params[:price], status: params[:status])
+            price: params[:price], status: status)
           if !@product.errors.blank?
             error!({error: @product.errors.full_messages}, 400)
           end
-        rescue Exception => e
-          error!({ error: ('Internal Server Error')}, 500)
-        end
+        # rescue Exception => e
+        #   error!({ error: ('Internal Server Error')}, 500)
+        # end
       end
 
 
