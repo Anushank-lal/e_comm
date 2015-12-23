@@ -1,0 +1,23 @@
+<h4>Edit Product</h4>
+<form role="form" name="editProduct" ng-submit="updateProduct()">
+  <div ng-bind="editProductErrorMessage"></div>
+  <fieldset ng-disabled="isSaving">
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" class="form-control" id="name" ng-model="product.first_name" required>
+    </div>
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <input type="text" class="form-control" id="description" ng-model="product.description" required>
+    </div>
+    <div class="form-group">
+      <label for="price">Price</label>
+      <input type="text" class="form-control" id="price" ng-model="product.price" required>
+    </div>
+    <div class="checkbox">
+      <label><input type="checkbox" value="true" ng-model="product.status">Status</label>
+    </div>
+    <button type="submit" class="btn btn-default">Update</button>
+    <a href="./" class="btn btn-default">Back</a>
+  </fieldset>
+</form>
