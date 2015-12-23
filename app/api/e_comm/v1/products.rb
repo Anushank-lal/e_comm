@@ -5,6 +5,21 @@ module EComm
       format :json
       formatter :json, Grape::Formatter::Rabl
 
+      desc "Show Product"
+      params do
+        requires :id, type: Integer, allow_blank: true
+      end
+
+      get "products/:id", rabl: "/api/v1/products/product.json.rabl" do
+        begin
+          @product = Product.find_by(id: params[:id])
+          error!({error: ('No product available with this id.')}, 400) if @product.nil?
+        rescue Exception => e
+          error!({ error: I18n.t('api.internal_server_error')}, 500)
+        end
+      end
+
+
       desc "List Products"
       params do
         optional :limit, type: Integer, allow_blank: true
@@ -30,7 +45,7 @@ module EComm
         requires :status, type: String, allow_blank: false, desc: "Product status"
       end
 
-      put :product, rabl: "/api/v1/products/create.json.rabl" do
+      post :product, rabl: "/api/v1/products/create.json.rabl" do
         begin
           product = Product.find_by(name: params[:name])
           error!({error: ("Product name already exists")}, 400) if product.present?
@@ -42,11 +57,7 @@ module EComm
             price: params[:price], status: params[:status]
           }
 
-          if @product.save!
-            #error!({success: ('Product Created.')}, 200)
-          else
-            error!({error: @product.errors.full_messages}, 400)
-          end
+          error!({error: @product.errors.full_messages}, 400) if !(@product.save!)
         rescue Exception => e
           error!({ error: ('Internal Server Error')}, 500)
         end
@@ -60,7 +71,7 @@ module EComm
         optional :status, type: String, allow_blank: false, desc: "Product status"
         requires :id, type: String, allow_blank: false, desc: "Product Id"
       end
-      patch :product, rabl: "/api/v1/products/create.json.rabl" do
+      patch "products/:id", rabl: "/api/v1/products/create.json.rabl" do
         begin
           @product = Product.find_by(id: params[:id])
           error!({error: ("Product name not exists")}, 400) if @product.nil?
