@@ -13,8 +13,8 @@ module EComm
 
       get :products, rabl: "/api/v1/products/products.json.rabl" do
         begin
-          limit = params[:limit].nil? ? 2 : params[:limit]
-          offset = params[:offset].nil? ? 1 : params[:offset]
+          limit = params[:limit].nil? ? 10 : params[:limit]
+          offset = params[:offset].nil? ? 0 : params[:offset]
           @products = Product.limit(limit).offset(offset)
           error!({error: ('No products available.')}, 400) if @products.nil?
         rescue Exception => e
