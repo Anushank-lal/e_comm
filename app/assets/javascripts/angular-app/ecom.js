@@ -22,7 +22,8 @@ ecom.config(['$routeProvider', '$locationProvider',
   function($routeProvider, $locationProvider) {
     $routeProvider
       .when("/",{
-        templateUrl: 'home/index.html'
+        templateUrl: 'product/index.html',
+        controller: 'ProductController',
       })
       .when("/login",{
         templateUrl: 'user/login.html',

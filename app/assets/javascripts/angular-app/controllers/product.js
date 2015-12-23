@@ -1,16 +1,10 @@
 'use strict';
 
 /* Controllers */
-ecom.controller("ProductController", ['$scope', '$location',
-  function($scope, $location) {
+ecom.controller("ProductController", ['$scope', 'ProductList',
+  function($scope, ProductList) {
 
-    $scope.products = {
-      query: '',
-      full_query: '',
-      location: '',
-      HotelDetailData: ''
-    };
-
+    $scope.productList = new ProductList();
 
   }
 ]);
