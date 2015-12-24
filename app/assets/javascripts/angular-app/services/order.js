@@ -9,9 +9,8 @@ ecom.factory("orderService", ['$http', '$q', '$route', 'UserInfo',
 
       $http.get(apiPath + "/orders?customer_id=" + UserInfo.info.id)
         .then(function(response) {
-          deferred.resolve(response.data);
+          deferred.resolve(response.data.orders);
         },function(error) {
-          console.log(error)
           deferred.reject(error);
         });
 
@@ -19,7 +18,7 @@ ecom.factory("orderService", ['$http', '$q', '$route', 'UserInfo',
     }
 
     return {
-      listOrders:       listOrders
+      listOrders: listOrders
     };
 
   }

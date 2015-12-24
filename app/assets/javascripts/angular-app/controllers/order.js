@@ -4,26 +4,16 @@
 ecom.controller("OrderController", ['$scope', 'orderService', 'UserInfo', '$location',
   function($scope, orderService, UserInfo, $location){
 
-    $scope.orders = orderService.listOrders();
+    $scope.orders = [];
 
-    // $scope.login = function () {
-    //   if ($scope.loginForm.$valid) {
-    //     $scope.isSaving = true;
-    //     var promise = userService.login($scope.user.email, $scope.user.password);
-    //     promise.then(
-    //       function(response){ // success
-    //         $location.path("/");
-    //       },
-    //       function(error){ // error
-    //         $scope.loginErrorMessage = error;
-    //       }
-    //     ).finally(function() {
-    //       // Always execute this on both error and success
-    //       $scope.isSaving = false;
-    //     });
-    //   };
-    // };
-
+    var promise = orderService.listOrders();;
+    promise.then(
+      function(response){ // success
+        $scope.orders = response;
+      },
+      function(error){ // error
+      }
+    );
 
   }
 ]);

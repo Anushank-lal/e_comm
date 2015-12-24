@@ -2,14 +2,16 @@
   <table class="table" ng-show="orders.length">
     <thead>
       <tr>
-        <th>Order Id</th>
+        <th>Order Number</th>
         <th>Status</th>
+        <th>Total Amount</th>
       </tr>
     </thead>
     <tbody>
       <tr ng-repeat="order in orders">
-        <td ng-bind="order.id"></td>
+        <td ng-bind="order.order_no"></td>
         <td ng-bind="order.status"></td>
+        <td ng-bind="order.total"></td>
       </tr>
     </tbody>
   </table>
