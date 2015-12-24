@@ -2,44 +2,48 @@
   <a href="products/new" class="btn btn-default">Add Product</a>
 </div>
 
-<div ng-if="UserInfo.isLogin">
-  <a href="cart" class="btn btn-default">View Cart</a>
-</div>
+<div ng-controller="CartController">
+  <div ng-if="UserInfo.isLogin">
+    <a href="cart" class="btn btn-default">View Cart (<span ng-bind="cartObj.no_of_items"></span> items)</a>
+  </div>
 
-<div infinite-scroll='productList.nextPage()' infinite-scroll-disabled='productList.busy' infinite-scroll-distance='1'>
-  <table class="table" ng-show="productList.products.length">
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Status</th>
-        <th>Price</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="product in productList.products">
-        <td ng-bind="product.id"></td>
-        <td ng-bind="product.name"></td>
-        <td ng-bind="product.description"></td>
-        <td ng-bind="product.status"></td>
-        <td ng-bind="product.price"></td>
-        <td>
-          <a ng-href="products/edit/{{product.id}}" ng-if="!UserInfo.isLogin">Edit</a>
-          <a ng-href="products/edit/{{product.id}}" ng-if="UserInfo.isLogin">Add to cart</a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div infinite-scroll='productList.nextPage()' infinite-scroll-disabled='productList.busy' infinite-scroll-distance='1'>
+    <table class="table" ng-show="productList.products.length">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Status</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="product in productList.products">
+          <td ng-bind="product.id"></td>
+          <td ng-bind="product.name"></td>
+          <td ng-bind="product.description"></td>
+          <td ng-bind="product.status"></td>
+          <td ng-bind="product.price"></td>
+          <td>
+            <a ng-href="products/edit/{{product.id}}" ng-if="!UserInfo.isLogin">Edit</a>
+            <a href="#" ng-click="addToCart(product.id)" ng-if="UserInfo.isLogin">Add to cart</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-  <div ng-show='!productList.products.length && !productList.more' class="text-center">
-    <div class="row text-center">
-      No Products to list
+    <div ng-show='!productList.products.length && !productList.more' class="text-center">
+      <div class="row text-center">
+        No Products to list
+      </div>
+    </div>
+
+    <div class="clear"></div>
+    <div ng-show='productList.more && productList.busy' class="text-center">
+      <i class="fa fa-refresh fa-spin fa-2x"></i>
     </div>
   </div>
 
-  <div class="clear"></div>
-  <div ng-show='productList.more && productList.busy' class="text-center">
-    <i class="fa fa-refresh fa-spin fa-2x"></i>
-  </div>
 </div>
+

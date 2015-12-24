@@ -1,33 +1,36 @@
 'use strict';
 
 /* Controllers */
-ecom.controller("CartController", ['$scope', 'orderService', 'UserInfo', '$location',
-  function($scope, orderService, UserInfo, $location){
+ecom.controller("CartController", ['$scope', 'cartService', 'UserInfo', '$location',
+  function($scope, cartService, UserInfo, $location){
 
-    if (!UserInfo.isLogin) {
-      $location.path("/login")
-    };
-
-    $scope.cart = {
-
+    $scope.cartObj = {
+      cart: {},
+      no_of_items: 0
     }
 
-    $scope.login = function () {
-      if ($scope.loginForm.$valid) {
-        $scope.isSaving = true;
-        var promise = userService.login($scope.user.email, $scope.user.password);
-        promise.then(
-          function(response){ // success
-            $location.path("/");
-          },
-          function(error){ // error
-            $scope.loginErrorMessage = error;
-          }
-        ).finally(function() {
-          // Always execute this on both error and success
-          $scope.isSaving = false;
-        });
-      };
+    if (UserInfo.isLogin) {
+      var promise = cartService.viewCart();
+      promise.then(
+        function(response){ // success
+          $scope.cartObj.cart = response;
+          $scope.cartObj.no_of_items = response.cart_items.length;
+        },
+        function(error){ // error
+        }
+      );
+    };
+
+    $scope.addToCart = function (product_id) {
+      var promise = cartService.addProductToCart(product_id);
+      promise.then(
+        function(response){ // success
+          $scope.cartObj.no_of_items = $scope.cartObj.no_of_items + 1;
+        },
+        function(error){ // error
+        }
+      );
+
     };
 
 

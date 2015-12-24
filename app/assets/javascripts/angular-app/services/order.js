@@ -4,26 +4,6 @@
 ecom.factory("orderService", ['$http', '$q', '$route', 'UserInfo',
   function($http, $q, $route, UserInfo) {
 
-    function addProductToCart(product_id) {
-      var deferred = $q.defer();
-
-      $http.put(apiPath + "/cart_items",
-      {
-        customer_id: UserInfo.info.id,
-        product_id:  product_id,
-        qty:         1
-      })
-      .then(function(response) {
-        deferred.resolve();
-      },
-      function(error) {
-        deferred.reject(error.data.error);
-      });
-
-      return deferred.promise;
-    }
-
-
     function listOrders() {
       var deferred = $q.defer();
 
@@ -60,9 +40,7 @@ ecom.factory("orderService", ['$http', '$q', '$route', 'UserInfo',
 
 
     return {
-      addProductToCart: addProductToCart,
-      listOrders:       listOrders,
-      updateProduct:    updateProduct
+      listOrders:       listOrders
     };
 
   }
