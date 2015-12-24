@@ -4,10 +4,6 @@
 ecom.controller("OrderController", ['$scope', 'orderService', 'UserInfo', '$location',
   function($scope, orderService, UserInfo, $location){
 
-    if (!UserInfo.isLogin) {
-      $location.path("/login")
-    };
-
     $scope.orders = orderService.listOrders();
 
     $scope.login = function () {

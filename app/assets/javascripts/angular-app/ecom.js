@@ -29,6 +29,7 @@ ecom.config(['$routeProvider', '$locationProvider',
         templateUrl: 'product/new.html',
         controller: 'ProductController',
         resolve: {
+          access: ['Access', function(Access){ return Access.isAnonymous(); }],
           productDetail: ['productService', function(productService){ return '' }]
         }
       })
@@ -36,6 +37,7 @@ ecom.config(['$routeProvider', '$locationProvider',
         templateUrl: 'product/edit.html',
         controller: 'ProductController',
         resolve: {
+          access: ['Access', function(Access){ return Access.isAnonymous(); }],
           productDetail: ['productService', function(productService){ return productService.showProduct(); }]
         }
       })
@@ -43,14 +45,14 @@ ecom.config(['$routeProvider', '$locationProvider',
         templateUrl: 'cart/index.html',
         controller: 'CartController',
         resolve: {
-          productDetail: ['productService', function(productService){ return '' }]
+          access: ['Access', function(Access){ return Access.isAuthenticated(); }]
         }
       })
       .when("/orders",{
         templateUrl: 'order/index.html',
         controller: 'OrderController',
         resolve: {
-          productDetail: ['productService', function(productService){ return '' }]
+          access: ['Access', function(Access){ return Access.isAuthenticated(); }]
         }
       })
       .when("/login",{
