@@ -58,7 +58,7 @@ ecom.config(['$routeProvider', '$locationProvider',
       })
       .when("/payment_result",{
         templateUrl: 'payment/result.html',
-        controller: 'PaymentController'
+        controller: 'PaymentResultController'
       })
       .when("/orders",{
         templateUrl: 'order/index.html',
