@@ -56,6 +56,10 @@ ecom.config(['$routeProvider', '$locationProvider',
           access: ['Access', function(Access){ return Access.isAuthenticated(); }]
         }
       })
+      .when("/payment_result",{
+        templateUrl: 'payment/result.html',
+        controller: 'PaymentController'
+      })
       .when("/orders",{
         templateUrl: 'order/index.html',
         controller: 'OrderController',
