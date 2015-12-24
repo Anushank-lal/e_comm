@@ -1,6 +1,11 @@
 <div ng-show="cartObj.cart.cart_items.length">
   <h4>Items in Cart</h4>
-  <a href="#" ng-click="makePayment()" class="btn btn-primary">Make Payment</a>
+
+  <div ng-controller="PaymentController">
+    <b>Total Amount : </b><span ng-bind="cartObj.cart.total_amount"></span>
+    <a href="#" ng-click="makePayment(cartObj.cart.order_no)" class="btn btn-primary">Make Payment</a>
+    <div auto-submit-form event="gateway.redirect"></div>
+  </div>
 
   <table class="table">
     <thead>

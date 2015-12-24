@@ -18,27 +18,6 @@ ecom.factory("orderService", ['$http', '$q', '$route', 'UserInfo',
       return deferred.promise;
     }
 
-
-    function updateProduct(product) {
-      var deferred = $q.defer();
-
-      $http.patch(apiPath + "/products/" + product.id, {
-        name:        product.name,
-        description: product.description,
-        status:      (product.status) ? 'enabled' : 'disabled',
-        price:       product.price
-      })
-      .then(function(response) {
-        deferred.resolve();
-      },
-      function(error) {
-        deferred.reject(error.data.error);
-      });
-
-      return deferred.promise;
-    }
-
-
     return {
       listOrders:       listOrders
     };

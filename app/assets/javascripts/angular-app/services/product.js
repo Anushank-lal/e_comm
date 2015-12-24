@@ -20,7 +20,7 @@ ecom.factory('productList', ['$http',
 
       $http.get(url).success(function(data) {
         var products = data.products;
-        console.log("Next offset : " + data.last);
+        // console.log("Next offset : " + data.last);
         // Pushing Results
         for (var i = 0; i < products.length; i++) {
           this.products.push(products[i]);
