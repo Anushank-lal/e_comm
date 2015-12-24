@@ -16,6 +16,7 @@ ecom.factory("userService", ['$http', '$q', '$location', 'UserInfo', 'LocalStora
         UserInfo.isLogin = true;
         UserInfo.token   = response.data.customer.access_token;
         UserInfo.info    = {
+          id:         response.data.customer.id,
           email:      response.data.customer.email,
           first_name: response.data.customer.first_name,
           last_name:  response.data.customer.last_name
@@ -43,7 +44,7 @@ ecom.factory("userService", ['$http', '$q', '$location', 'UserInfo', 'LocalStora
 
           LocalStorage.setKey('UserInfo', UserInfo);
           deferred.resolve();
-          $location.path("/login");
+          $location.path("/");
 
         },function(error) {
           UserInfo.isLogin   = false;
@@ -51,7 +52,7 @@ ecom.factory("userService", ['$http', '$q', '$location', 'UserInfo', 'LocalStora
 
           LocalStorage.setKey('UserInfo', UserInfo);
           deferred.reject(error);
-          $location.path("/login");
+          $location.path("/");
         });
 
       return deferred.promise;
@@ -72,6 +73,7 @@ ecom.factory("userService", ['$http', '$q', '$location', 'UserInfo', 'LocalStora
         UserInfo.isLogin = true;
         UserInfo.token   = response.data.customer.access_token;
         UserInfo.info    = {
+          id:         response.data.customer.id,
           email:      response.data.customer.email,
           first_name: response.data.customer.first_name,
           last_name:  response.data.customer.last_name

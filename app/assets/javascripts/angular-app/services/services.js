@@ -6,6 +6,7 @@ ecom.factory('UserInfo', function(){
     isLogin: false,
     token: null,
     info: {
+      id: '',
       email: '',
       first_name: '',
       last_name: '',
