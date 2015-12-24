@@ -1,3 +1,4 @@
+include ActionView::Helpers::NumberHelper
 module EComm
   module V1
     class Orders < Grape::API
@@ -17,6 +18,7 @@ module EComm
           @total_amount = 0
           @cart_items = @order.order_lines.map{|x| x.attributes } if @order.order_lines.present?
           @order.order_lines.map{|x| @total_amount += x.total_price } if @order.order_lines.present?
+          @total_amount = number_to_currency(@total_amount, scale: 2)
           error!({error: "No items in cart"}, 400) if @cart_items.blank?
         rescue Exception => e
           error!({ error: "Internal Server Error" }, 500)
