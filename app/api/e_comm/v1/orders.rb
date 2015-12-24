@@ -12,10 +12,11 @@ module EComm
       end
 
       get :cart_items, rabl: "/api/v1/orders/cart_items.json.rabl" do
-        begin
-          @order = Order.cart_orders.where(customer_id: params[:customer_id])
-          @cart_items = []
-          @order.map{|x|  (@cart_items << x.order_lines.map{|x| x.attributes }) if x.order_lines.present?}
+       begin
+          @order = Order.cart_orders.where(customer_id: params[:customer_id]).first
+          @total_amount = 0
+          @cart_items = @order.order_lines.map{|x| x.attributes } if @order.order_lines.present?
+          @order.order_lines.map{|x| @total_amount += x.total_price } if @order.order_lines.present?
           error!({error: "No items in cart"}, 400) if @cart_items.blank?
         rescue Exception => e
           error!({ error: "Internal Server Error" }, 500)

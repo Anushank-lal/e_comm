@@ -1,28 +1,18 @@
-== README
+Ecommerce Site
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* Ruby version: 2.1.5
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
+* Rails version: 4.2.3
 
 * Configuration
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Database creation: Database used Mysql. Just run rake db:create, rake db:migrate, rake db:seed for sample data.
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+* User to Login: email: demo@gmail.com, password: qwerty1
+
+* Payment Services: It's an independent ruby application includes as Dummy Gateway in zip file.
+	You need to run this on rails server on port 3001
+
+* Deployment instructions:
+

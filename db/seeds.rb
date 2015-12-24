@@ -15,7 +15,19 @@ Product.create!(status:0 , name: "Product 3", price: 25.20, description: "Test d
 Product.create!(status:0 , name: "Product 4", price: 21.10, description: "Test description")
 Product.create!(status:0 , name: "Product 5", price: 22.50, description: "Test description")
 
-Customer.create!(firstname: "Anushank", lastname: "lal", email: "anushank@gmail.com", password: "1234567")
 Customer.create!(firstname: "Demo", lastname: "demo", email: "demo@gmail.com", password: "qwerty1")
+Customer.create!(firstname: "Anushank", lastname: "lal", email: "anushank@gmail.com", password: "1234567")
 Customer.create!(firstname: "Test", lastname: "test", email: "test@gmail.com", password: "qwerty2")
 
+product = Product.first
+unit_price = product.price
+total_price = (unit_price * params[:qty])
+order_no = rand.to_s[2..8]
+@order = Order.create!(status: 0, order_no: order_no, customer_id: Customer.first.id, total: total_price, date: Date.today)
+@cart_item = OrderLine.new
+@cart_item.attributes =
+{
+  order_id: @order.id, product_id: product.id],
+  qty: 2, unit_price: unit_price, total_price: total_price
+}
+@cart_item.save!
