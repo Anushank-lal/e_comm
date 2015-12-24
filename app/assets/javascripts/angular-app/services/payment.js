@@ -12,7 +12,7 @@ ecom.factory("paymentService", ['$http', '$q', '$rootScope', '$sce',
           var data = {
             redirectUrl: $sce.trustAsResourceUrl(response.data.order.payment_url),
             redirectMethod: 'POST',
-            redirectData: { order_no: response.data.order.order_no, amount: response.data.order.total }
+            redirectData: { order_no: response.data.order.order_no, amount: response.data.order.total, payment_return_url: response.data.order.payment_return_url }
           };
 
           $rootScope.$broadcast('gateway.redirect', data);
