@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  get 'payment/payment_result'
+  get 'payment_result'  => 'payment#payment_result'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
