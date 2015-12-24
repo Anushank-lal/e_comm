@@ -10,17 +10,14 @@ ecom.factory("paymentService", ['$http', '$q', '$rootScope', '$sce',
       $http.get(apiPath + "/payment?order_no=" + order_no)
         .then(function(response) {
           var data = {
-            redirectUrl: $sce.trustAsResourceUrl(response.data.target_url),
+            redirectUrl: $sce.trustAsResourceUrl(response.data.order.payment_url),
             redirectMethod: 'POST',
-            redirectData: response.data.payment_params
+            redirectData: { order_no: response.data.order.order_no, amount: response.data.order.total }
           };
-
-          console.log(response)
 
           $rootScope.$broadcast('gateway.redirect', data);
           deferred.resolve();
         },function(error) {
-
           deferred.reject(error);
         });
 
