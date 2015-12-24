@@ -8,7 +8,7 @@ class PaymentController < ApplicationController
     else
       @order.update_attributes!(status: 1)
     end
-    redirect_to "http://localhost:3000/status=#{@status}/order_no=#{@order_no}"
+    redirect_to "http://localhost:3000/payment_response?status=#{@status}/order_no=#{@order_no}"
 
   end
 end
