@@ -33,6 +33,14 @@ ecom.config(['$routeProvider', '$locationProvider',
           productDetail: ['productService', function(productService){ return '' }]
         }
       })
+      .when("/products/:id",{
+        templateUrl: 'product/show.html',
+        controller: 'ProductController',
+        resolve: {
+          access: ['Access', function(Access){ return Access.isAuthenticated(); }],
+          productDetail: ['productService', function(productService){ return productService.showProduct(); }]
+        }
+      })
       .when("/products/edit/:id",{
         templateUrl: 'product/edit.html',
         controller: 'ProductController',

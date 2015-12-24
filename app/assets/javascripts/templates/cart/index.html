@@ -1,1 +1,32 @@
-cart
+<div ng-show="cartObj.cart.cart_items.length">
+  <h4>Items in Cart</h4>
+  <a href="#" ng-click="makePayment()" class="btn btn-primary">Make Payment</a>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Prodcut Id</th>
+        <th>Quantity</th>
+        <th>Unit Price</th>
+        <th>Total Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="item in cartObj.cart.cart_items">
+        <td>
+          <a ng-href="products/{{item.product_id}}" ng-bind="item.product_id"></a>
+        </td>
+        <td ng-bind="item.qty"></td>
+        <td ng-bind="item.unit_price"></td>
+        <td ng-bind="item.total_price"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div ng-show='!cartObj.cart.cart_items.length' class="text-center">
+  <div class="row text-center">
+    No products in cart.
+  </div>
+</div>
+

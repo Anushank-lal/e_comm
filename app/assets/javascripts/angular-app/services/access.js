@@ -1,7 +1,7 @@
 "use strict";
 
-ecom.factory('Access', ['$q', 'UserInfo', '$location', 'userService',
-  function($q, UserInfo, $location, userService) {
+ecom.factory('Access', ['$q', 'UserInfo', '$location',
+  function($q, UserInfo, $location) {
 
     var Access = {
 
@@ -13,6 +13,7 @@ ecom.factory('Access', ['$q', 'UserInfo', '$location', 'userService',
         var deferred = $q.defer();
 
         if (UserInfo.isLogin) {
+          $location.path("/");
           deferred.reject(Access.UNAUTHORIZED);
         }
         else{
@@ -30,6 +31,7 @@ ecom.factory('Access', ['$q', 'UserInfo', '$location', 'userService',
           deferred.resolve(Access.OK);
         }
         else{
+          $location.path("/login");
           deferred.reject(Access.UNAUTHORIZED);
         };
 
