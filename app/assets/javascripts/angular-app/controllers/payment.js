@@ -17,19 +17,27 @@ ecom.controller("PaymentController", ['$scope', 'paymentService', 'UserInfo', '$
       };
     };
 
+  }
+]);
 
-     var payment_status = $routeParams.status;
+ecom.controller("PaymentResultController", ['$scope', '$location', '$routeParams',
+  function($scope, $location, $routeParams){
 
-     $scope.order_no = $routeParams.order_no;
+    var payment_status = $routeParams.status;
 
-     if (payment_status) {
-      $scope.payment_status = "Successfull"
-      $scope.order_status = "Successfull"
-     }
-     else{
-      $scope.payment_status = "Failed"
-      $scope.order_status = "Failed"
-     };
+    $scope.order_no = $routeParams.order_no;
+
+    if (payment_status == true) {
+      $scope.payment_status = "Successfull";
+      $scope.order_status = "Successfull";
+    }
+    else if(payment_status == false){
+      $scope.payment_status = "Failed";
+      $scope.order_status = "Failed";
+    }
+    else{
+      $location.path("/");
+    };
 
   }
 ]);
