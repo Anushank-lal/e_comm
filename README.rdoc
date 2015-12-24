@@ -6,7 +6,7 @@ Ecommerce Site
 
 * Configuration
 
-* Database creation: Database used Mysql. Just run rake db:create, rake db:migrate, rake db:seed for sample data.
+* Database creation: Database used Mysql. Just run rake db:create, rake db:migrate, rake db:seed for sample data. So no need to mysql db import script.
 
 
 * User to Login: email: demo@gmail.com, password: qwerty1
@@ -14,5 +14,5 @@ Ecommerce Site
 * Payment Services: It's an independent ruby application includes as Dummy Gateway in zip file.
 	You need to run this on rails server on port 3001
 
-* Deployment instructions:
+* I am not Familiar with wink and time is short too. So not adding any recordings.
 
