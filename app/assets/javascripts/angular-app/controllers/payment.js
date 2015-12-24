@@ -27,11 +27,11 @@ ecom.controller("PaymentResultController", ['$scope', '$location', '$routeParams
 
     $scope.order_no = $routeParams.order_no;
 
-    if (payment_status == true) {
+    if (payment_status == "true") {
       $scope.payment_status = "Successfull";
       $scope.order_status = "Successfull";
     }
-    else if(payment_status == false){
+    else if(payment_status == "false"){
       $scope.payment_status = "Failed";
       $scope.order_status = "Failed";
     }
