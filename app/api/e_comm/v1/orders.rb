@@ -96,6 +96,20 @@ module EComm
         end
       end
 
+      desc "Finalize Payment"
+      params do
+        requires :order_no, type: String, allow_blank: false
+      end
+
+      get :payment, rabl: "/api/v1/orders/payment.json.rabl" do
+        begin
+          @order = Order.find_by(order_no: params[:order_no])
+          error!({error: 'Order not exists.'}, 400) if @order.nil?
+        rescue Exception => e
+          error!({ error: "Internal Server Error" }, 500)
+        end
+      end
+
 
     end
   end
