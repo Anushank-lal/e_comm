@@ -39,6 +39,20 @@ ecom.config(['$routeProvider', '$locationProvider',
           productDetail: ['productService', function(productService){ return productService.showProduct(); }]
         }
       })
+      .when("/cart",{
+        templateUrl: 'cart/index.html',
+        controller: 'CartController',
+        resolve: {
+          productDetail: ['productService', function(productService){ return '' }]
+        }
+      })
+      .when("/orders",{
+        templateUrl: 'order/index.html',
+        controller: 'OrderController',
+        resolve: {
+          productDetail: ['productService', function(productService){ return '' }]
+        }
+      })
       .when("/login",{
         templateUrl: 'user/login.html',
         controller: 'UserController'
