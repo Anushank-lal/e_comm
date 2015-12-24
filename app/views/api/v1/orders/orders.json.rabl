@@ -1,5 +1,5 @@
 node(:orders) do
-  @orders.map{|x| x.attributes}
+  @orders.map{|x| x.attributes.merge(status: x.status)}
 end
 
 node(:result_count) do

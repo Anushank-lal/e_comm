@@ -21,7 +21,7 @@ module EComm
             @order.order_lines.map{|x| @total_amount += x.total_price } if @order.order_lines.present?
             @total_amount = number_to_currency(@total_amount, scale: 2)
           end
-          error!({error: "No items in cart"}, 400) if  (@order.nil? || @cart_items.blank?)
+          error!({error: "No items in cart"}, 400) if (@order.nil? || @cart_items.blank?)
         rescue Exception => e
           error!({ error: "Internal Server Error" }, 500)
         end
