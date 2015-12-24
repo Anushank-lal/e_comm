@@ -43,14 +43,19 @@ module EComm
             @order.order_lines.map { |e| total += e.total_price  }
             @order.update_attributes(total: total)
           end
-          @cart_item = OrderLine.new
-          @cart_item.attributes =
-          {
-            order_id: @order.id, product_id: params[:product_id],
-            qty: params[:qty], unit_price: unit_price, total_price: total_price
-          }
+          @cart_item = @order.order_lines.where(product_id: params[:product_id]).first
+          if @cart_item.nil?
+            @cart_item = OrderLine.new
+            @cart_item.attributes =
+            {
+              order_id: @order.id, product_id: params[:product_id],
+              qty: params[:qty], unit_price: unit_price, total_price: total_price
+            }
 
-          error!({error: @cart_item.errors.full_messages}, 400) if !(@cart_item.save!)
+            error!({error: @cart_item.errors.full_messages}, 400) if !(@cart_item.save!)
+          else
+            @cart_item.update_attributes!(qty: @cart_item.qty += params[:qty], total_price: @cart_item.total_price += total_price )
+          end
         rescue Exception => e
          error!({ error: "Internal Server Error" }, 500)
         end
